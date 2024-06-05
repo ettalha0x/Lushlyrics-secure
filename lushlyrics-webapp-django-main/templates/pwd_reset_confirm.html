@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>password reset confirmation form</title>
+
+</head>
+<body>
+    <h1>password reset confirmation form</h1>
+    <form action="/auth/password/reset/confirm/" method="post">
+        {% csrf_token %}
+        {% if uidb64 %}
+            <input type="hidden" name="uid" value="{{ uidb64 }}">
+        {% endif %}
+        {% if token %}
+            <input type="hidden" name="token" value="{{ token }}">
+        {% endif %}
+        <label for="new_password1">password</label>
+        <input type="password" name="new_password1" id="new_password1">
+        <label for="new_password2">confirm password</label>
+        <input type="password" name="new_password2" id="new_password2">
+        <button type="submit">reset</button>
+</body>
+</html>

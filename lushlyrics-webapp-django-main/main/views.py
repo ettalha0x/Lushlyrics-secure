@@ -63,13 +63,29 @@ def search(request):
 
 
 
+# def add_playlist(request):
+#     cur_user = playlist_user.objects.get(username = request.user)
+
+#     if (request.POST['title'],) not in cur_user.playlist_song_set.values_list('song_title', ):
+
+#         songdic = (YoutubeSearch(request.POST['title'], max_results=1).to_dict())[0]
+#         song__albumsrc=songdic['thumbnails'][0]
+#         cur_user.playlist_song_set.create(song_title=request.POST['title'],song_dur=request.POST['duration'],
+#         song_albumsrc = song__albumsrc,
+#         song_channel=request.POST['channel'], song_date_added=request.POST['date'],song_youtube_id=request.POST['songid'])
+
 def add_playlist(request):
-    cur_user = playlist_user.objects.get(username = request.user)
+    cur_user = playlist_user.objects.get(username=request.user)
 
-    if (request.POST['title'],) not in cur_user.playlist_song_set.values_list('song_title', ):
+    title = request.POST.get('title')
+    duration = request.POST.get('duration')
+    channel = request.POST.get('channel')
+    date = request.POST.get('date')
+    songid = request.POST.get('songid')
 
-        songdic = (YoutubeSearch(request.POST['title'], max_results=1).to_dict())[0]
-        song__albumsrc=songdic['thumbnails'][0]
-        cur_user.playlist_song_set.create(song_title=request.POST['title'],song_dur=request.POST['duration'],
-        song_albumsrc = song__albumsrc,
-        song_channel=request.POST['channel'], song_date_added=request.POST['date'],song_youtube_id=request.POST['songid'])
+    if title and (title,) not in cur_user.playlist_song_set.values_list('song_title', ):
+        songdic = (YoutubeSearch(title, max_results=1).to_dict())[0]
+        song__albumsrc = songdic['thumbnails'][0]
+        cur_user.playlist_song_set.create(song_title=title, song_dur=duration,
+                                          song_albumsrc=song__albumsrc,
+                                          song_channel=channel, song_date_added=date, song_youtube_id=songid)

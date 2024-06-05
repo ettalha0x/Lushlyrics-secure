@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>password reset</title>
+</head>
+<body>
+    <h1>password reset</h1>
+    <form action="/auth/password/reset/" method="post">
+        {% csrf_token %}
+        <label for="email">email</label>
+        <input type="email" name="email" id="email">
+        <button type="submit">reset</button>
+    </form>
+</body>
+</html>

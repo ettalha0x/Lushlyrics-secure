@@ -7,4 +7,5 @@ urlpatterns = [
     path("", views.default, name='default'),
     path("playlist/", views.playlist, name='your_playlists'),
     path("search/", views.search, name='search_page'),
+    path('add_playlist/', views.add_playlist, name='add_playlist'),
 ]

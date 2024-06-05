@@ -112,8 +112,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
 SITE_ID = 1
+SITE_DOMAIN = '127.0.0.1'
+SITE_NAME = 'Youtify'
+EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+PASSWORD_RESET_TIMEOUT = 24 * 60 * 60
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 LANGUAGE_CODE = 'en-us'
+DEFAULT_PROTOCOL = 'http'
 
 TIME_ZONE = 'UTC'
 
