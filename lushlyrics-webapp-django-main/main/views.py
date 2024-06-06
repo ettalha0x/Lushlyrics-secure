@@ -24,8 +24,12 @@ def default(request):
         return HttpResponse("")
 
     song = 'kSFJGEHDCrQ'
-    return render(request, 'player.html',{'CONTAINER':CONTAINER, 'song':song})
-
+    if request.user.is_authenticated:
+        cur_user = playlist_user.objects.get(username = request.user)
+        user_playlist = cur_user.playlist_song_set.all()
+        return render(request, 'player.html', {'song':song,'user_playlist':user_playlist, 'CONTAINER':CONTAINER, 'song':song})
+    else:
+        return redirect('/auth/login/')
 
 
 def playlist(request):
